@@ -1,0 +1,42 @@
+Se entreno un modelo que pueda diferencias las piezas de un tablero de alquerque realizando los siguientes pasos:
+    1. Segmentar los tableros hasta obtener las 25 piezas del tablero separadas en imagenes diferentes
+    2. Se extrajeron los descriptores por medio del algoritmo de sift de cada pieza de tablero segmentada
+    3. Con la lista de descriptores usando el algoritmo de agrupamiento Kmeans se obtuvieron hasta 3 clusters
+    4. Se crearon una lista de histogramas con las caracteristicas agrupadas por Kmeans
+    5. Para entrenar a un modelo de Maquina de Soporte Vectorial (SVM) se uso la lista de histogramas de 5 tableros distintos y sus etiquetas reales
+    6. Para comprobar el accuracy del modelo se le pasaron 100 imagenes de tableros diferentes donde se imprimio en los mismos tableros las etiquetas
+        predichas por el modelo SVM para cada segmento y se reviso manualmente los resultados predichos de todos los tableros
+    7. Se pudo comprobar que el modelo construido fue 100% preciso con las imagenes evaluadas, por lo tanto siempre reconoce las casillas de un tablero evaluado
+
+Se construyeron varios dataset basados en diferentes tipos de extractores de caracteristicas entre los cuales se encuentran:
+    - SIFT
+    - HOG
+    - Momentos
+    - Momentos Hu
+    - Momentos Zernike
+
+Se entreno un modelo basado en CNN (Convolutional Neural Network) con las mismas imagenes que se entreno el modelo previo
+Se evaluaron los resultados por medio de etiquetas escritas en las mismas imagenes de los dos algoritmos de clasificacion presentados
+    se encontro que el clasificador de CNN era bastante impreciso a comparacion del clasificador construido al inicio del proyecto
+    el cual tenia un accuracy del 100%
+
+Se procedio a la construccion de un dataset de (100 x 25) donde se convirtio a los 100 tableros evaluados por el modelo anterior
+    en clases y se colocaron en una sola fila de 25 columnas que representaban todos las casillas de un tablero
+
+Se elaboro un algoritmo que extrajo todos los movimientos posibles de una ficha alrededor de esta, y este calculo multiplicado por todos los tableros evaluados
+
+Se extrajeron un aproximado de 130 movimientos por tablero
+Lo que dio un dataset final de 9070 movimientos
+
+Entrando al area de Aprendizaje Automatico se realizo un modelo Random Forest donde se evalaron las primeras 100 semillas en torno a la particion del dataset
+Se guardo en una tabla las semillas evaluadas con su accuracy y por medio de un algoritmo se extrajo de valor de la mediana entre todos los accuracies
+Se procedio a realizar la particion del dataset en train y test con un randomizado basado en la semilla del accuracy anteriormente extraido y se almaceno estos 
+    dataset en documentos diferentes para poder replicar pruebas con todos los modelos.
+    - Semilla utilizada para particionamiento => 77
+
+Se entrenaron tres modelos diferentes:
+    - Neural Network => 0.98239
+    - Perceptron Multicapa => 0.98026
+    - Random Forest => 0.89968
+
+Todos los modelos obtuvieron accuracies altos siendo el del Random Forest el mas bajo de entre los tres modelos
