@@ -82,7 +82,3 @@ El proyecto demostró que el modelo SVM con descriptores SIFT fue extremadamente
 3. Ejecutar los scripts de segmentación y extracción de características.
 4. Entrenar los modelos de clasificación.
 5. Evaluar los modelos con el dataset de test.
-
-## Contacto
-
-Para más información, puedes contactar al autor del proyecto.
